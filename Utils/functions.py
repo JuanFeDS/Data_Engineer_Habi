@@ -1,4 +1,5 @@
 "General utilites"
+import os
 import hashlib
 import logging
 
@@ -7,25 +8,27 @@ import pandas as pd
 def config_logging(dia, append=True):
     """Logging configuration"""
 
-    # Especificamos el formato del logging
     log_format = "%(levelname)s %(asctime)s - %(message)s"
+    log_directory = "./Log"
+    log_filename = os.path.join(log_directory, f"log_{dia}.log")
 
-    # Definimos el modo de escritura
-    filemode = 'a' if append is True else 'w'
+    # Crear el directorio si no existe
+    os.makedirs(log_directory, exist_ok=True)
 
-    # Configuramos nuestro logging
+    # Definir el modo de apertura del archivo
+    filemode = 'a' if append else 'w'
+
+    # Configurar logging globalmente
     logging.basicConfig(
-        filename=f'./Log/log_{dia}.log',
+        filename=log_filename,
         level=logging.INFO,
         format=log_format,
         filemode=filemode,
-        encoding='utf-8'
+        encoding="utf-8",
     )
 
-    # Inicializamos el logging
-    logger = logging.getLogger()
-
-    return logger
+    # Retornar el logger
+    return logging.getLogger()
 
 def generate_numeric_id(
         df: pd.DataFrame,
