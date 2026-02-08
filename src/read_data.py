@@ -1,6 +1,4 @@
 "Script to clean raw data from an XML file and return it as a Pandas DataFrame."
-
-import os
 from datetime import datetime
 import xml.etree.ElementTree as ET
 
@@ -34,43 +32,28 @@ def run(fecha: datetime):
     # Define XML file path
     path = './Data/Raw/feed.xml'
 
-    # Validate file existence
-    if not os.path.exists(path):
-        logger.error(f'File not found: {path}')
-        raise FileNotFoundError(f'File not found: {path}')
-    
-    try:
-        # Load XML file
-        tree = ET.parse(path)
-        root = tree.getroot()
-        logger.info('XML file successfully loaded.')
-    except ET.ParseError as e:
-        logger.error(f'Error parsing XML file: {e}')
-        raise
-    except Exception as e:
-        logger.error(f'Unexpected error loading XML: {e}')
-        raise
+    # Load XML file
+    tree = ET.parse(path)
+    root = tree.getroot()
+    logger.info('XML file successfully loaded.')
 
     data = []
 
     # Extract data from XML
     for listing in root.findall("listing"):
-        try:
-            data.append({
-                "state": listing.find("state").text,
-                "city": listing.find("city").text,
-                "colony": listing.find("colony").text,
-                "street": listing.find("street").text,
-                "external_num": listing.find("external_num").text,
-                "code": listing.find("code").text,
-                "type": listing.find("type").text,
-                "purpose": listing.find("purpose").text,
-                "price": float(listing.find("price").text) if listing.find("price").text else None,  # Convert to float
-                "mail_contact": listing.find("mail_contact").text,
-                "phone_contact": listing.find("phone_contact").text
-            })
-        except AttributeError as e:
-            logger.warning(f'Missing value in listing: {e}')
+        data.append({
+            "state": listing.find("state").text,
+            "city": listing.find("city").text,
+            "colony": listing.find("colony").text,
+            "street": listing.find("street").text,
+            "external_num": listing.find("external_num").text,
+            "code": listing.find("code").text,
+            "type": listing.find("type").text,
+            "purpose": listing.find("purpose").text,
+            "price": float(listing.find("price").text) if listing.find("price").text else None,  # Convert to float
+            "mail_contact": listing.find("mail_contact").text,
+            "phone_contact": listing.find("phone_contact").text
+        })
 
     # Convert extracted data into a DataFrame
     df_raw = pd.DataFrame(data)

@@ -1,12 +1,10 @@
-"Module for MYSQL connection"
 import os
+from dotenv import load_dotenv
 
 import mysql.connector
-from dotenv import load_dotenv
 
 load_dotenv()
 
-# Variables globales
 config = {
     "user": os.getenv('user'),
     "password": os.getenv('password'),
@@ -15,14 +13,13 @@ config = {
     "port": os.getenv('port')
 }
 
-# Realizamos la conexión
-conn = mysql.connector.connect(**config)
-cursor = conn.cursor()
 
-def load_records(df, query_insert):
-    """Function to load records on database"""
+def conexion(df, query):
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+
     data = [tuple(row) for row in df.itertuples(index=False, name=None)]
-    cursor.executemany(query_insert, data)
+    cursor.executemany(query, data)
     conn.commit()
 
     cursor.close()
