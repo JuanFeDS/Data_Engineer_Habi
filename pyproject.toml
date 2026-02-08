@@ -5,6 +5,7 @@ description = "ETL para la base de datos de Habi"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "apache-beam[tfrecord]>=2.71.0",
     "lxml>=6.0.2",
     "matplotlib>=3.10.8",
     "pandas>=3.0.0",
