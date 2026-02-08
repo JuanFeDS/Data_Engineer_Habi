@@ -1,0 +1,30 @@
+[project]
+name = "habi-etl"
+version = "0.1.0"
+description = "ETL para la base de datos de Habi"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lxml>=6.0.2",
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.0",
+    "plotly>=6.5.2",
+    "seaborn>=0.13.2",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.1.0",
+    "ipykernel>=7.2.0",
+    "jupyter>=1.1.1",
+    "jupyterlab>=4.5.3",
+    "python-dateutil>=2.9.0.post0",
+    "pre-commit>=4.5.1",
+    "pylint>=4.0.4",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
