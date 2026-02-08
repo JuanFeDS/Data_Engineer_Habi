@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88]
+
+#   - repo: https://github.com/pycqa/isort
+#     rev: 5.13.2
+#     hooks:
+#       - id: isort
+#         args: [--profile=black]
+
+#   - repo: https://github.com/pycqa/pylint
+#     rev: v3.0.3
+#     hooks:
+#       - id: pylint
+#         args: [--min-score=8.5, --fail-under=8.5]
+
+#   - repo: local
+#     hooks:
+#       - id: pytest-check
+#         name: pytest-check
+#         entry: uv run pytest --cov=src --cov-fail-under=80 --cov-report=term-missing
+#         language: system
+#         pass_filenames: false
+#         always_run: true
