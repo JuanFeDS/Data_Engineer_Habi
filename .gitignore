@@ -14,6 +14,9 @@ __pycache__/
 old_version/
 docs
 
+# Claude Code MCP configuration
+.vincent/
+
 # C extensions
 *.so
 

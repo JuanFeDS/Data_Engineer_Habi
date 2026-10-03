@@ -2,7 +2,6 @@
 Main module for the prueba_habi application.
 """
 
-
 def main():
     """
     Main function to run the application.
